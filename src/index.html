@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Backend-task-kamran</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body class="bg-slate-100 md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto">
+        <h1 class="mt-10 text-center text-3xl font-bold text-green-600">To do list</h1>
+        <form onsubmit="addTodos()" class="flex space-x-10 justify-center mt-10">
+            <input id="todo" type="text" required class="block rounded text-gray-700 border-gray-300 px-3 py-1.5 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="add todos...">
+            <button type="submit" class="py-1.5 px-3 rounded bg-green-600 text-white">Add</button>
+        </form>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+          const socket = io();
+          function addTodos() {
+            const todo = document.querySelector('#todo').value;
+            console.log(todo);
+            if(todo) {
+                socket.emit('add', todo);
+            }
+          }
+        </script>
+    </body>
+
+</html>
