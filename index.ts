@@ -8,7 +8,13 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const Redis = require('redis');
-const client = Redis.createClient();
+const client = Redis.createClient({
+    socket: {
+        host: process.env.REDIS_HOST,
+        port: process.env.REDIS_PORT
+    },
+    password: process.env.REDIS_PASSWORD
+});
 
 // connecting to database MongoDB
 mongoose.set('strictQuery', false);
@@ -32,7 +38,6 @@ const TodoModel = mongoose.model('BACKEND_TASK_KAMRAN', todoSchema);
 async function addToMongoDB() {
     try {
         const arr = await client.lRange('BACKEND_TASK_KAMRAN', 0, -1);
-        console.log(arr);
         const doc = new TodoModel({
             todos: arr
         });

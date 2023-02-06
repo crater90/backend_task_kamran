@@ -23,3 +23,9 @@ npm install
 # and
 npm start
 ```
+### Please add environment variables in .env file
+
+DATABASE_URL = mongodb+srv://**********mongodb.net/backend-tasks <br/>
+REDIS_HOST = ****** <br/>
+REDIS_PORT = ***** <br/>
+REDIS_PASSWORD = *****
